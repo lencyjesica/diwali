@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Diwali Kutty 💖</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: radial-gradient(#1b0033, #000);
+        font-family: "Poppins", sans-serif;
+        color: white;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .container {
+        padding: 50px 20px;
+        position: relative;
+        z-index: 2;
+      }
+
+      h1 {
+        font-size: 2.5em;
+        text-shadow: 0 0 20px #ff80ab;
+        animation: glow 2s infinite alternate;
+      }
+
+      @keyframes glow {
+        from {
+          text-shadow: 0 0 10px #f48fb1;
+        }
+        to {
+          text-shadow: 0 0 25px #ff4081;
+        }
+      }
+
+      p {
+        margin-top: 20px;
+        font-size: 1.2em;
+        color: #fff0f6;
+      }
+
+      .heart {
+        position: absolute;
+        color: #ff80ab;
+        font-size: 20px;
+        animation: float 5s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0) scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-800px) scale(1.5);
+          opacity: 0;
+        }
+      }
+
+      .fireworks {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: auto;
+        z-index: 1;
+      }
+
+      .explosion {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        opacity: 0;
+        animation: explode 1.2s ease-out infinite;
+        cursor: pointer;
+      }
+
+      @keyframes explode {
+        0% {
+          transform: scale(0.2);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(5);
+          opacity: 0;
+        }
+      }
+
+      .star {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: white;
+        border-radius: 50%;
+        animation: twinkle 2s infinite ease-in-out;
+        opacity: 0.8;
+      }
+
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.2;
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.5);
+        }
+      }
+
+      .diya-btn {
+        background: #ff6d00;
+        color: white;
+        border: none;
+        padding: 10px 25px;
+        font-size: 1em;
+        border-radius: 30px;
+        margin-top: 30px;
+        box-shadow: 0 0 20px #ff6d00;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .diya-btn:hover {
+        background: #ff9100;
+        transform: scale(1.1);
+      }
+
+      .diya {
+        margin-top: 30px;
+        font-size: 80px;
+        display: none;
+        animation: flicker 1s infinite alternate;
+      }
+
+      @keyframes flicker {
+        from {
+          text-shadow: 0 0 10px #ff6d00, 0 0 20px #ff9100;
+        }
+        to {
+          text-shadow: 0 0 25px #ffab40, 0 0 40px #ffc107;
+        }
+      }
+
+      iframe {
+        margin-top: 20px;
+        border-radius: 12px;
+      }
+    </style>
+  </head>
+  <body onload="showLoveMessage()">
+    <div class="container">
+      <h1>💞 Happy Diwali KUTTY 💞</h1>
+      <p>
+        You are my sweetest light that shines brighter than every diya.<br />
+        This Diwali, I wish our love glows forever like the stars ✨
+      </p>
+
+      <!-- Diya button -->
+      <button class="diya-btn" onclick="lightDiya()">
+        🪔 Click to Light a Diya
+      </button>
+      <div class="diya" id="diya">🪔</div>
+
+      <!-- Spotify Embed -->
+      <iframe
+        src="https://open.spotify.com/embed/track/2WO5nzB7QtKn9ZRc9Jkalt?utm_source=generator"
+        width="100%"
+        height="80"
+        frameborder="0"
+        allowfullscreen
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
+      ></iframe>
+    </div>
+
+    <!-- Floating hearts -->
+    <span class="heart" style="left: 10%; animation-delay: 0s">💖</span>
+    <span class="heart" style="left: 30%; animation-delay: 1s">💞</span>
+    <span class="heart" style="left: 50%; animation-delay: 2s">💗</span>
+    <span class="heart" style="left: 70%; animation-delay: 3s">💕</span>
+    <span class="heart" style="left: 90%; animation-delay: 4s">💓</span>
+
+    <!-- Fireworks container -->
+    <div class="fireworks" id="fireworkContainer"></div>
+
+    <!-- Stars -->
+    <script>
+      const starCount = 100;
+      for (let i = 0; i < starCount; i++) {
+        const star = document.createElement("div");
+        star.classList.add("star");
+        star.style.top = Math.random() * 100 + "%";
+        star.style.left = Math.random() * 100 + "%";
+        star.style.animationDuration = 1 + Math.random() * 2 + "s";
+        document.body.appendChild(star);
+      }
+
+      // Fireworks setup
+      const fireworkContainer = document.getElementById("fireworkContainer");
+      const colors = [
+        "#ff1744",
+        "#00e5ff",
+        "#ffd740",
+        "#7c4dff",
+        "#69f0ae",
+        "#ff4081",
+        "#00bcd4",
+        "#ff6d00",
+        "#c6ff00",
+      ];
+
+      function createFirework(x, y) {
+        const fw = document.createElement("div");
+        fw.classList.add("explosion");
+        fw.style.top = y + "px";
+        fw.style.left = x + "px";
+        fw.style.background = colors[Math.floor(Math.random() * colors.length)];
+        fw.style.animation = "explode 0.8s ease-out forwards";
+        fireworkContainer.appendChild(fw);
+        setTimeout(() => fireworkContainer.removeChild(fw), 1000);
+
+        const sound = new Audio("https://www.fesliyanstudios.com/play-mp3/387"); // firework crackle
+        sound.volume = 0.3;
+        sound.play();
+      }
+
+      // Random background fireworks
+      for (let i = 0; i < 20; i++) {
+        const fw = document.createElement("div");
+        fw.classList.add("explosion");
+        fw.style.top = Math.random() * 90 + "%";
+        fw.style.left = Math.random() * 90 + "%";
+        fw.style.background = colors[i % colors.length];
+        fw.style.animationDelay = i * 0.3 + "s";
+        fireworkContainer.appendChild(fw);
+      }
+
+      // Click to burst
+      fireworkContainer.addEventListener("click", function (e) {
+        createFirework(e.clientX, e.clientY);
+      });
+
+      // Light diya
+      function lightDiya() {
+        document.getElementById("diya").style.display = "block";
+        const audio = new Audio("https://www.fesliyanstudios.com/play-mp3/387");
+        audio.volume = 0.4;
+        audio.play();
+      }
+
+      // Love popup
+      function showLoveMessage() {
+        setTimeout(() => {
+          alert(
+            "💖 Hey Kutty, Happy Diwali! \nMay our love sparkle brighter than all the fireworks in the sky! 💥"
+          );
+        }, 1000);
+      }
+    </script>
+  </body>
+</html>
